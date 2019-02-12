@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Session3</string>
+    <string name="etLat">latitude</string>
+    <string name="etLon">longitude</string>
+    <string name="button1">GO!</string>
+    <string name="button2">Reset</string>
+
+</resources>
