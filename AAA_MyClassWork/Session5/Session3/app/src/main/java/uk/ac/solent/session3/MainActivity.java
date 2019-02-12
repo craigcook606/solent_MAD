@@ -1,11 +1,13 @@
 package uk.ac.solent.session3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.preference.PreferenceManager;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import android.widget.Button;
@@ -13,6 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
     public static final Double DEFAULT_LAT = 50.9246;
@@ -20,12 +25,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public static final Integer DEFAULT_ZOOM = 11;
 
     MapView mv;
-
     TextView mi;
-
-
-
-
     TextView mo;
 
 
@@ -61,7 +61,54 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == R.id.choosemap)
+        {
+            // react to the menu item being selected...
+            Intent intent = new Intent(this,MapChooseActivity.class);
+            startActivityForResult(intent, 0);
+            return true;
+        }
+        if(item.getItemId() == R.id.tbd)
+        {
+            // react to the menu item being selected...
+            System.out.println("DEBUG MESSAGE called tbd");
 
+
+            return true;
+        }
+
+
+
+        return false;
+    }
+
+    protected void onActivityResult(int requestCode,int resultCode,Intent intent)
+    {
+        if(requestCode==0)
+        {
+            if (resultCode==RESULT_OK)
+            {
+                Bundle extras=intent.getExtras();
+                boolean hikebikemap = extras.getBoolean("com.example.hikebikemap");
+                if(hikebikemap==true)
+                {
+                    mv.setTileSource(TileSourceFactory.HIKEBIKEMAP);
+                }
+                else
+                {
+                    mv.setTileSource(TileSourceFactory.MAPNIK);
+                }
+            }
+        }
+    }
 
     @Override
     public void onClick(View view) {
