@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Session3</string>
+    <string name="etLat">latitude</string>
+    <string name="etLon">longitude</string>
+    <string name="button1">GO!</string>
+    <string name="button2">Reset</string>
+    <string name="choosemap">Choose Map</string>
+    <string name="selectmap">Select Map</string>
+    <string name="regularview">Main Map</string>
+    <string name="hikebikemapview">Hike Map</string>
+</resources>
